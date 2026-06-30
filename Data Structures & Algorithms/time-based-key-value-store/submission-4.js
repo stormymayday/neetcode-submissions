@@ -1,0 +1,56 @@
+class TimeMap {
+    constructor() {
+        this.keyStore = new Map();
+    }
+
+    /**
+     * @param {string} key
+     * @param {string} value
+     * @param {number} timestamp
+     * @return {void}
+     */
+    set(key, value, timestamp) {
+
+        if(!this.keyStore.has(key)) {
+            this.keyStore.set(key, []);
+        }
+
+        this.keyStore.get(key).push([value, timestamp]);
+
+    }
+
+    /**
+     * @param {string} key
+     * @param {number} timestamp
+     * @return {string}
+     */
+    get(key, timestamp) {
+
+        let result = "";
+        let mostRecentTime = -1;
+
+        if(!this.keyStore.has(key)) {
+
+            return result;
+
+        } else {
+
+            const values = this.keyStore.get(key);
+
+            for(let i = 0; i < values.length; i++) {
+
+                const [value, time] = values[i];
+
+                if(time <= timestamp && time > mostRecentTime) {
+                    result = value;
+                    mostRecentTime = time;
+                }
+
+            }
+
+            return result;
+
+        }
+
+    }
+}

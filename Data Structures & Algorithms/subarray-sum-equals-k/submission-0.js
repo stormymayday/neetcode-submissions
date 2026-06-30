@@ -1,0 +1,21 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @param {number} k
+     * @return {number}
+     */
+    subarraySum(nums, k) {
+        let count = 0;
+        for(let i = 0; i < nums.length; i += 1) {
+            let sum = 0;
+            for(let j = i; j < nums.length; j += 1) {
+                sum += nums[j];
+                if(sum === k) {
+                    count += 1;
+                    // break;
+                }
+            }
+        }
+        return count;
+    }
+}
